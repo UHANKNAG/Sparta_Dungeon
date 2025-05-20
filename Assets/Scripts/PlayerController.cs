@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
-    void Awake()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
@@ -30,24 +30,29 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Cursor를 Lock 시키는 (보이지 않게)
+       Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void FixedUpdate()
-    {
+   
+    // rigidbody와 같은 물리 연산을 실행할 땐 FixedUpdate
+    void FixedUpdate() {
         Move();
     }
 
-    // 실제로 움직일 메소드
+    private void LateUpdate()
+    {
+        CameraLook();
+    }
+
+    // 저장된 curMovementInput을 실제 이동에 적용하는 메소드
     void Move() 
     {
-        // 방향을 구하고 힘(moveSpeed)를 곱해 줌
+        if (curMovementInput == Vector2.zero) {
+            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
+            return;
+        }
+
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
         dir.y = _rigidbody.velocity.y;
@@ -55,16 +60,69 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = dir;
     }
 
-    // 키보드 입력을 받을 메소드
-    public void OnMove(InputAction.CallbackContext context)
+    void CameraLook() 
     {
-        if(context.phase == InputActionPhase.Performed)
+        // 상하 각도 조절 / 마우스 각도에 따른 카메라 상하 회전
+        // 최소, 최대 값을 정해 그 안에서만 움직일 수 있도록 (카메라만 움직임)
+        camCurXRot += mouseDelta.y * lookSensitivity;
+        camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
+        cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+
+        // 좌우 움직임 / 마우스값에 따라 transform(player)에게 회전을 적용한다
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+    }
+
+    // 현재 상태를 받아오는 context
+    // 입력 값을 받아 curMovementInput에 저장하는 메소드
+    public void OnMove(InputAction.CallbackContext context) 
+    {
+        if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
         }
-        else if (context.phase == InputActionPhase.Canceled) 
+        else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
         }
     }
+
+    public void OnLook(InputAction.CallbackContext context) 
+    {
+        mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    public void OnJump(InputAction.CallbackContext context) 
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Debug.Log("Jump Pressed!");
+
+            if (IsGrounded())
+            {
+                _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            }
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        Vector3 origin = transform.position + Vector3.up * 0.1f;
+        float rayLength = 1f;
+
+        Debug.DrawRay(origin, Vector3.down * rayLength, Color.red);
+        
+        bool grounded = Physics.Raycast(origin, Vector3.down, rayLength, groundLayerMask);
+
+        if (grounded)
+        {
+            Debug.Log("바닥 감지됨!");
+        }
+        else
+        {
+            Debug.Log("바닥 감지 실패");
+        }
+
+        return grounded;
+    }
+
 }
