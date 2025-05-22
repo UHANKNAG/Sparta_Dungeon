@@ -11,13 +11,13 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
     public UICondition uiCondition;
 
     Condition health {get {return uiCondition.health;}}
-    // Condition hunger {get {return uiCondition.hunger;}}
-    // Condition stamina {get {return uiCondition.stamina;}}
+    Condition hunger {get {return uiCondition.hunger;}}
+    Condition stamina {get {return uiCondition.stamina;}}
 
-    // public float noHungerHealthDecay;
+    public float noHungerHealthDecay;
     
-    // // Delegate
-    // public event Action onTakeDamage;
+    // Delegate
+    public event Action onTakeDamage;
 
     void Update()
     {
@@ -29,10 +29,10 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
         //     health.Subtract(noHungerHealthDecay * Time.deltaTime);
         // } 
 
-        if (health.curValue == 0f)
-        {
-            Die();
-        }
+        // if (health.curValue == 0f)
+        // {
+        //     Die();
+        // }
     }
 
     public void Heal(float amout) 
