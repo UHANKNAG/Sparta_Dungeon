@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Unity.Profiling;
 using UnityEngine;
 
 public interface IDamagable
@@ -40,6 +42,11 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
         health.Add(amout);
     }
 
+    public void Fast(float amout)
+    {
+        StartCoroutine(SpeedUp(amout));
+    }
+
     // public void Eat(float amout)
     // {
     //     hunger.Add(amout);
@@ -55,4 +62,14 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
     //     health.Subtract(damage);
     //     onTakeDamage?.Invoke();
     // }
+
+    private IEnumerator SpeedUp(float amout)
+    {
+        float Speed = CharacterManager.Instance.Player.controller.moveSpeed;
+        CharacterManager.Instance.Player.controller.moveSpeed *= amout;
+
+        yield return new WaitForSeconds(5f);
+
+        CharacterManager.Instance.Player.controller.moveSpeed = Speed;
+    }
 }

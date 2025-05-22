@@ -204,6 +204,9 @@ public class UIInventory : MonoBehaviour
                         condition.Heal(selectedItem.consumables[i].value);
                         break;
 
+                    case ConsumableType.Faster:
+                        condition.Fast(selectedItem.consumables[i].value);
+                        break;
                     // case ConsumableType.Hunger:
                     //     condition.Eat(selectedItem.consumables[i].value);
                     //     break;
