@@ -1452,7 +1452,7 @@ MonoBehaviour:
   curValue: 0
   startValue: 100
   maxValue: 100
-  passiveValue: 5
+  passiveValue: 10
   uiBar: {fileID: 807412968}
 --- !u!114 &576913091
 MonoBehaviour:
@@ -1851,6 +1851,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 97236c95-d654-4258-a35e-8b9031560909
     m_ActionName: Player/Interaction[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 681778663}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c5b396d3-e9bd-4313-ad5b-4c56f0424b29
+    m_ActionName: Player/Dash[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1908,6 +1924,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCondition: {fileID: 0}
   noHungerHealthDecay: 2
+  dashStamina: 20
+  isDash: 0
 --- !u!114 &681778666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2173,7 +2191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &773994480
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2190,9 +2208,9 @@ RectTransform:
   - {fileID: 1243053437}
   m_Father: {fileID: 453203990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -83.666664}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &773994481
@@ -3191,8 +3209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1159718101}
-  hunger: {fileID: 0}
-  stamina: {fileID: 0}
+  hunger: {fileID: 773994481}
+  stamina: {fileID: 576913090}
 --- !u!1 &1232662679
 GameObject:
   m_ObjectHideFlags: 0

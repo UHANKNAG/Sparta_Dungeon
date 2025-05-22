@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.Profiling;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public interface IDamagable
 {
@@ -17,24 +18,38 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
     Condition stamina {get {return uiCondition.stamina;}}
 
     public float noHungerHealthDecay;
+
+    public float dashStamina;
+
+    public bool isDash = false;
     
     // Delegate
     public event Action onTakeDamage;
 
     void Update()
     {
-        // hunger.Subtract(hunger.passiveValue * Time.deltaTime);
-        // stamina.Add(stamina.passiveValue * Time.deltaTime);
+        hunger.Subtract(hunger.passiveValue * Time.deltaTime);
+        stamina.Add(stamina.passiveValue * Time.deltaTime);
 
-        // if (hunger.curValue == 0f) 
-        // {
-        //     health.Subtract(noHungerHealthDecay * Time.deltaTime);
-        // } 
+        if (hunger.curValue == 0f) 
+        {
+            health.Subtract(noHungerHealthDecay * Time.deltaTime);
+        } 
 
-        // if (health.curValue == 0f)
-        // {
-        //     Die();
-        // }
+        if (health.curValue == 0f)
+        {
+            Die();
+        }
+
+        if (isDash)
+        {
+            stamina.Subtract(dashStamina * Time.deltaTime);
+        }
+
+        if (stamina.curValue == 0f)
+        {
+            CantDash();
+        }
     }
 
     public void Heal(float amout) 
@@ -47,10 +62,15 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
         StartCoroutine(SpeedUp(amout));
     }
 
-    // public void Eat(float amout)
-    // {
-    //     hunger.Add(amout);
-    // }
+    public void Eat(float amout)
+    {
+        hunger.Add(amout);
+    }
+
+    public void CantDash()
+    {
+        Debug.Log("Dash 불가능");
+    }
 
     public void Die()
     {

@@ -138,12 +138,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void ToggleCursor()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+        {
+            moveSpeed *= 2f;
+            CharacterManager.Instance.Player.condition.isDash = true;
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            moveSpeed /= 2f;
+            CharacterManager.Instance.Player.condition.isDash = false;
+        }
     }
 }
 
