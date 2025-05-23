@@ -55,9 +55,12 @@ public class PlayerController : MonoBehaviour
     // 저장된 curMovementInput을 실제 이동에 적용하는 메소드
     void Move() 
     {
+        // 벽 타기 시도할 경우의 Move 처리리
         if (IsWalled())
         {
             Vector3 wallPos = transform.forward;
+
+            // 기존 Gravity를 해제하고, 벽 방향으로의 힘을 가해 붙어있을 수 있도록
             CharacterManager.Instance.Player.GetComponent<Rigidbody>().useGravity = false;
             CharacterManager.Instance.Player.GetComponent<Rigidbody>().AddForce(wallPos * 10f);
 
@@ -68,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
             Vector3 dir = transform.up * curMovementInput.y + transform.right * curMovementInput.x;
             dir *= moveSpeed;
-            // dir.y = _rigidbody.velocity.y;
 
             _rigidbody.velocity = dir;
 
@@ -167,15 +169,6 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(origin, transform.forward * rayLength, Color.red);
         
         bool walled = Physics.Raycast(origin, transform.forward, rayLength, wallLayerMask);
-
-        // if (walled)
-        // {
-        //     Debug.Log("벽 감지됨!");
-        // }
-        // else
-        // {
-        //     Debug.Log("벽 감지 실패");
-        // }
 
         return walled;
     }

@@ -108,7 +108,6 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
 
     private IEnumerator Gravity()
     {
-
         Debug.Log("중력 OFF");
         isZeroGravity = true;
         CharacterManager.Instance.Player.GetComponent<Rigidbody>().useGravity = false;

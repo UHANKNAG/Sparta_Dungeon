@@ -35,16 +35,19 @@ public class MovingPad : MonoBehaviour
                 yield return null;
             }
 
+            // Start와 End를 바꾸어 두 점의 사이를 이동할 수 있도록
             Vector3 temp = start;
             start = end;
             end = temp;
         }
     }
 
+    // Player를 자식으로 가져와 Pad와 같이 이동할 수 있도록
     private void OnTriggerEnter(Collider other) {
         other.transform.SetParent(this.transform);
     }
 
+    // Player가 벗어나면 다시 Player를 밖으로 빼낸다
     private void OnTriggerExit(Collider other)
     {
         other.transform.SetParent(null);        
