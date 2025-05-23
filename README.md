@@ -65,6 +65,7 @@ Unity 3D에 대해 학습하고, Unity3D의 캐릭터 이동과 물리 처리를
   >
   > OnTriggerEnter와 OnTriggerExit를 이용하여, 점프대 위에서 OnTrigger 이벤트가 발생하면
   > Player를 MovingPad Object의 자식으로 옮겨 MovingPad와 함께 이동하도록 하였다.
+  > 
   > ![MovingPadCode](https://github.com/UHANKNAG/Sparta_Dungeon/blob/main/Screenshots/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-05-23%20150041.png)
 
 
@@ -75,7 +76,8 @@ Unity 3D에 대해 학습하고, Unity3D의 캐릭터 이동과 물리 처리를
   > ![TopWall](https://github.com/UHANKNAG/Sparta_Dungeon/blob/main/Screenshots/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-05-23%20150911.png)
   >
   > Player Move의 분기를 나누어 벽에 붙었을 경우에는 다르게 이동할 수 있도록 구현하였다.
-  > ![IsWalledMoveCode]()
+  > 
+  > ![IsWalledMoveCode](https://github.com/UHANKNAG/Sparta_Dungeon/blob/main/Screenshots/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-05-23%20152914.png)
 
 
 - 다양한 아이템 구현
@@ -83,4 +85,4 @@ Unity 3D에 대해 학습하고, Unity3D의 캐릭터 이동과 물리 처리를
   > 일정 시간이 지나면 다시 중력이 적용되어 Player는 바닥에 떨어진다.
   > 
   > ![Cupcake](https://github.com/UHANKNAG/Sparta_Dungeon/blob/main/Screenshots/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-05-23%20151051.png)
-  > ![ZeroGravity]()
+  > ![ZeroGravity](https://github.com/UHANKNAG/Sparta_Dungeon/blob/main/Screenshots/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-05-23%20153051.png)
