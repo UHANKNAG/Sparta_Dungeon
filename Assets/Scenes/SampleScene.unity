@@ -2074,6 +2074,7 @@ MonoBehaviour:
   dashStamina: 20
   isDash: 0
   canDash: 1
+  isZeroGravity: 0
 --- !u!114 &681778666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6267,9 +6268,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 471290488403465097, guid: c47a20799597f0147a8c299ba294ab5b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: d9c12a6df0baa9a48ae1fe0336fd8514, type: 2}
     - target: {fileID: 2744040466454735709, guid: c47a20799597f0147a8c299ba294ab5b, type: 3}
       propertyPath: m_Name
       value: Item_Cupcake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744040466454735709, guid: c47a20799597f0147a8c299ba294ab5b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7219054430180003420, guid: c47a20799597f0147a8c299ba294ab5b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6310,6 +6319,10 @@ PrefabInstance:
     - target: {fileID: 7219054430180003420, guid: c47a20799597f0147a8c299ba294ab5b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053570646586554248, guid: c47a20799597f0147a8c299ba294ab5b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

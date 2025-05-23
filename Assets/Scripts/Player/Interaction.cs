@@ -54,8 +54,6 @@ public class Interaction : MonoBehaviour
                 promptText.gameObject.SetActive(false);
             }
         }
-
-       
     }
 
     private void SetPromptText()
