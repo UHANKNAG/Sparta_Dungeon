@@ -41,7 +41,11 @@ Unity 3D에 대해 학습하고, Unity3D의 캐릭터 이동과 물리 처리를
   > Player를 MovingPad Object의 자식으로 옮겨 MovingPad와 함께 이동하도록 하였다.
 
 - Raycast를 활용한 벽 타기 및 매달리기
+  > Raycast를 활용하여 Wall Layer가 지정된 벽을 감지하고,
+  > Player의 Gravity를 해제하여 벽에 붙을 수 있도록 하였다.
   >
+  > Player Move의 분기를 나누어 벽에 붙었을 경우에는 다르게 이동할 수 있도록 구현하였다.
 
 - 다양한 아이템 구현
-  >
+  > Cupcake를 소비할 시 Coroutine을 활용해 잠시 무중력일 수 있도록 구현하였다.
+  > 일정 시간이 지나면 다시 중력이 적용되어 Player는 바닥에 떨어진다.
