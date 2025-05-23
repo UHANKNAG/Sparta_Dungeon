@@ -11,7 +11,7 @@ Unity 3D에 대해 학습하고, Unity3D의 캐릭터 이동과 물리 처리를
   > PlayerController.cs에서 각 키를 만족하는 Input이 들어오면 동작을 처리하도록 하였다.
   
   > 기본 이동에 Dash 기능을 추가하여, Shift 키를 누르는 동안 Stamina를 소비하여 속도를 낼 수 있도록 하였다.
-  ![이미지 이름](이미지 링크 주소)
+  ![InputSystem](https://github.com/UHANKNAG/Sparta_Dungeon/blob/main/Screenshots/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-05-23%20143651.png)
 
 - 체력바 UI 표시
   > UI 캔버스에 체력바를 추가하고 Player의 체력이 나타나도록 설정하였다.
