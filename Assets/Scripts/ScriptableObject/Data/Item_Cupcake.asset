@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4d6d4a8f16c1440a6436be3a430543, type: 3}
+  m_Name: Item_Cupcake
+  m_EditorClassIdentifier: 
+  displayName: "\uCEF5\uCF00\uC774\uD06C"
+  description: "\uC7A0\uC2DC \uBB34\uC911\uB825\uC744 \uACBD\uD5D8\uD558\uAC8C \uB429\uB2C8\uB2E4."
+  type: 1
+  icon: {fileID: 21300000, guid: 43046426625693b41b1c2ee199d4c15a, type: 3}
+  dropPrefab: {fileID: 2744040466454735709, guid: c47a20799597f0147a8c299ba294ab5b, type: 3}
+  canStack: 0
+  maxStackAmount: 0
+  consumables:
+  - type: 3
+    value: 0

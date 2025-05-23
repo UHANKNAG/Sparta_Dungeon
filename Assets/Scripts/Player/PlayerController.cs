@@ -75,7 +75,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            CharacterManager.Instance.Player.GetComponent<Rigidbody>().useGravity = true;
+            if (!CharacterManager.Instance.Player.condition.isZeroGravity)
+            {
+                CharacterManager.Instance.Player.GetComponent<Rigidbody>().useGravity = true;
+            }
+
             if (curMovementInput == Vector2.zero) {
                 _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
                 return;

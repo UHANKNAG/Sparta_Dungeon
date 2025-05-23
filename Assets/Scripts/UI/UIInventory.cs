@@ -207,9 +207,12 @@ public class UIInventory : MonoBehaviour
                     case ConsumableType.Faster:
                         condition.Fast(selectedItem.consumables[i].value);
                         break;
-                    // case ConsumableType.Hunger:
-                    //     condition.Eat(selectedItem.consumables[i].value);
-                    //     break;
+                    case ConsumableType.Hunger:
+                        condition.Eat(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.ZeroGravity:
+                        condition.NoGravity();
+                        break;
                 }
             }
             RemoveSelectedItem();

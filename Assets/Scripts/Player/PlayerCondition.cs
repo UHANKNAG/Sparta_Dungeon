@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.Profiling;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public interface IDamagable
@@ -24,6 +25,7 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
     public bool isDash = false;
     public bool canDash = true;
     
+    public bool isZeroGravity = false;
     // Delegate
     public event Action onTakeDamage;
 
@@ -73,6 +75,11 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
         hunger.Add(amout);
     }
 
+    public void NoGravity()
+    {
+        StartCoroutine(Gravity());
+    }
+
     public void CantDash()
     {
         Debug.Log("Dash 불가능");
@@ -97,5 +104,19 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
         yield return new WaitForSeconds(5f);
 
         CharacterManager.Instance.Player.controller.moveSpeed = Speed;
+    }
+
+    private IEnumerator Gravity()
+    {
+
+        Debug.Log("중력 OFF");
+        isZeroGravity = true;
+        CharacterManager.Instance.Player.GetComponent<Rigidbody>().useGravity = false;
+
+        yield return new WaitForSeconds(5f);
+
+        Debug.Log("중력 ON");
+        isZeroGravity = false;
+        CharacterManager.Instance.Player.GetComponent<Rigidbody>().useGravity = true;
     }
 }
