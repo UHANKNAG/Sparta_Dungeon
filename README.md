@@ -60,6 +60,7 @@ Unity 3D에 대해 학습하고, Unity3D의 캐릭터 이동과 물리 처리를
 
 - Coroutine을 활용한 움직이는 플랫폼
   > Coroutine과 Lerp를 이용하여 일정한 시간 동안 정해진 구역을 이동하는 MovingPad를 구현하였다.
+  > 
   > ![MovingPad1](https://github.com/UHANKNAG/Sparta_Dungeon/blob/main/Screenshots/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-05-23%20145859.png)
   > ![MovingPad2](https://github.com/UHANKNAG/Sparta_Dungeon/blob/main/Screenshots/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-05-23%20145906.png)
   >
