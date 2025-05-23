@@ -22,6 +22,7 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
     public float dashStamina;
 
     public bool isDash = false;
+    public bool canDash = true;
     
     // Delegate
     public event Action onTakeDamage;
@@ -46,9 +47,14 @@ public class PlayerCondition : MonoBehaviour //, IDamagable
             stamina.Subtract(dashStamina * Time.deltaTime);
         }
 
-        if (stamina.curValue == 0f)
+        if (stamina.curValue <= 0f)
         {
             CantDash();
+            canDash = false;
+        }
+        else
+        {
+            canDash = true;            
         }
     }
 

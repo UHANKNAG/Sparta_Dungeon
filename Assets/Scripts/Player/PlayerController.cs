@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -11,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float jumpPower;
     private Vector2 curMovementInput;
     public LayerMask groundLayerMask;
+    public LayerMask wallLayerMask;
 
 
     [Header("Look")]
@@ -52,16 +55,38 @@ public class PlayerController : MonoBehaviour
     // 저장된 curMovementInput을 실제 이동에 적용하는 메소드
     void Move() 
     {
-        if (curMovementInput == Vector2.zero) {
-            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
-            return;
+        if (IsWalled())
+        {
+            Vector3 wallPos = transform.forward;
+            CharacterManager.Instance.Player.GetComponent<Rigidbody>().useGravity = false;
+            CharacterManager.Instance.Player.GetComponent<Rigidbody>().AddForce(wallPos * 10f);
+
+            if (curMovementInput == Vector2.zero) {
+                _rigidbody.velocity = Vector3.zero;
+                return;
+            }
+
+            Vector3 dir = transform.up * curMovementInput.y + transform.right * curMovementInput.x;
+            dir *= moveSpeed;
+            // dir.y = _rigidbody.velocity.y;
+
+            _rigidbody.velocity = dir;
+
         }
+        else
+        {
+            CharacterManager.Instance.Player.GetComponent<Rigidbody>().useGravity = true;
+            if (curMovementInput == Vector2.zero) {
+                _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
+                return;
+            }
 
-        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
-        dir.y = _rigidbody.velocity.y;
+            Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+            dir *= moveSpeed;
+            dir.y = _rigidbody.velocity.y;
 
-        _rigidbody.velocity = dir;
+            _rigidbody.velocity = dir;
+        }
     }
 
     void CameraLook() 
@@ -129,6 +154,28 @@ public class PlayerController : MonoBehaviour
         return grounded;
     }
 
+
+    private bool IsWalled()
+    {
+        Vector3 origin = transform.position + Vector3.up * 0.1f;
+        float rayLength = 0.5f;
+
+        Debug.DrawRay(origin, transform.forward * rayLength, Color.red);
+        
+        bool walled = Physics.Raycast(origin, transform.forward, rayLength, wallLayerMask);
+
+        // if (walled)
+        // {
+        //     Debug.Log("벽 감지됨!");
+        // }
+        // else
+        // {
+        //     Debug.Log("벽 감지 실패");
+        // }
+
+        return walled;
+    }
+
     public void OnInventory(InputAction.CallbackContext context)
     {
         if(context.phase == InputActionPhase.Started)
@@ -149,13 +196,18 @@ public class PlayerController : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Performed)
         {
-            moveSpeed *= 2f;
+            if (!CharacterManager.Instance.Player.condition.canDash)
+            {
+                return;
+            }
+
             CharacterManager.Instance.Player.condition.isDash = true;
+            moveSpeed *= 2f;
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            moveSpeed /= 2f;
             CharacterManager.Instance.Player.condition.isDash = false;
+            moveSpeed /= 2f;
         }
     }
 }
